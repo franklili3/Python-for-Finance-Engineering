@@ -8,7 +8,7 @@ import io
 import requests
 
 # TODO: replace with your own API key
-apikey = "GETYOUROWNKEY"
+apikey = "G9X6PNM9DW17K47X"
 
 # get daily stock prices
 def getDailyStockPrices(symbol):
