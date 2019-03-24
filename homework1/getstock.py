@@ -29,7 +29,7 @@ def getMinuteStockPrices(symbol):
     symbol_df = symbol_df.sort_values('timestamp', ascending=True)
     converted_timestamp = pd.to_datetime(symbol_df['timestamp'], infer_datetime_format=True)
     symbol_df.index = converted_timestamp
-    symbol_df = symbol_df.drop(columns = ['timestamp'])
+    symbol_df = symbol_df.drop(['timestamp'], axis= 1)
     return symbol_df
 
 # get minute stock prices
@@ -38,3 +38,9 @@ def getLatestStockPrice(symbol):
     s = requests.get(url).content
     symbol_df = pd.read_csv(io.StringIO(s.decode('utf-8')))
     return symbol_df['price'].values[0]
+
+# download data of stocks
+symbol = 'MSFT'
+history_data_MSFT_1min = getMinuteStockPrices(symbol)
+#print(type(history_data_MSFT_1min))
+print(history_data_MSFT_1min.iloc[0,])
