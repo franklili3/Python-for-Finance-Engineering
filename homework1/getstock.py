@@ -43,4 +43,8 @@ def getLatestStockPrice(symbol):
 symbol = 'MSFT'
 history_data_MSFT_1min = getMinuteStockPrices(symbol)
 #print(type(history_data_MSFT_1min))
-print(history_data_MSFT_1min.iloc[0,])
+#print(history_data_MSFT_1min.iloc[0,])
+chart_date = '2019-03-18'
+chart_history_data = history_data_MSFT_1min.loc(str(['timestamp'])[0:10] == chart_date, )
+print(type(chart_history_data))
+#print(chart_history_data)
