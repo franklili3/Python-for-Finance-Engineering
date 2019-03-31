@@ -27,10 +27,10 @@ def show_book():
     for key in sorted( buy_orders, reverse = True ):
         buy_price.append(key)
         buy_qty.append(int(buy_orders[key]))
-    for key in sorted(sell_orders):
+    for key in sorted( sell_orders ):
         sell_price.append(key)
-        sell_qty.append(sell_orders[key])
-    
+        sell_qty.append(int(sell_orders[key]))    
+    #display_book = pd.DataFrame.from_items([('BUY_QTY', buy_qty),('BUY_PX', buy_price), ('SELL_PX', sell_price), ('SELL_QTY', sell_qty)])
     d = OrderedDict(BUY_QTY = buy_qty, BUY_PX = buy_price, SELL_PX = sell_price, SELL_QTY = sell_qty)
     display_book = pd.DataFrame(OrderedDict([(k, pd.Series(v)) for k, v in d.items()]))
     display(display_book)
