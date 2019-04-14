@@ -132,4 +132,34 @@ def new_order(side, price, qty):
                 else:
                     buy_orders[price] = remaining_order_qty
                 break 
-    
+                
+## randomly decide a new buy order or sell order 
+def random_price(side, bbo):
+    if side == 's':
+        price = bbo[1][0] + round(np.random.random(), 2)
+    else:
+        price = bbo[0][0] + round(np.random.random(), 2)
+    return price  
+
+## add new order to order book
+def new_bbo_df(n):
+    bbo_df = pd.DataFrame(columns = ['bid', 'offer'], index = list(range(n)))
+    dummy_book()
+    for i in range(n):
+        bbo = get_BBO()
+        side = np.random.choice(['s','b'])[0]
+        price = random_price(side, bbo)
+        qty = np.random.randint(1,1000)
+        new_order(side, price, qty)
+        new_bbo = get_BBO()
+        bbo_df.bid[i] = new_bbo[0][0]
+        bbo_df.offer[i] = new_bbo[1][0]
+    return bbo_df
+
+## plot the bbo
+def plot_bbo(bbo_df):
+    bbo_df.plot(figsize = (16, 9))
+if  __name__ == "__main__":
+    n = 200
+    bbo_df = new_bbo_df(n)
+    plot_bbo(bbo_df) 
